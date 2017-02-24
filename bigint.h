@@ -13,11 +13,15 @@ void bigint_free(struct bigint *b);
 
 struct bigint *bigint_resize(struct bigint *b, sdigit_t ssize);
 
+// Allocate a bigint, with uninitialized digits.
+// Overwrite the digits before using. (Except when ssize == 0.)
+struct bigint *bigint_alloc(sdigit_t ssize);
+
 struct bigint *bigint_alloc_copy(digit_t const *digits, sdigit_t ssize);
 
 inline static
 struct bigint *bigint_alloc_zero() {
-	return bigint_alloc_copy(NULL, 0);
+	return bigint_alloc(0);
 }
 
 inline static
