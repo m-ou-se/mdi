@@ -38,10 +38,8 @@ bool mdi_add(
 	for (size_t i = 0; i < rn; ++i) {
 		digit_t ad = i < an ? a[i] : 0;
 		digit_t bd = i < bn ? b[i] : 0;
-		digit_t rd;
-		carry = add_overflow(ad, carry, &rd);
-		carry |= add_overflow(rd, bd, &rd);
-		r[i] = rd;
+		carry = add_overflow(ad, carry, &r[i]);
+		carry |= add_overflow(r[i], bd, &r[i]);
 	}
 	return rn && carry;
 }
