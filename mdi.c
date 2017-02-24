@@ -12,6 +12,9 @@ bool mdi_add_signed(
 ) {
 	assert(rn >= an);
 	assert(rn >= bn);
+	assert(r == a || !(r < a + an && a < r + rn));
+	assert(r == b || !(r < b + bn && b < r + rn));
+
 	digit_t a_extend = an && a[an-1] >> (DIGIT_BITS - 1) ? -1 : 0;
 	digit_t b_extend = bn && b[bn-1] >> (DIGIT_BITS - 1) ? -1 : 0;
 	int carry = negate_b;
@@ -32,6 +35,8 @@ bool mdi_add(
 	digit_t const *a, size_t an,
 	digit_t const *b, size_t bn
 ) {
+	assert(r == a || !(r < a + an && a < r + rn));
+	assert(r == b || !(r < b + bn && b < r + rn));
 	assert(rn >= an);
 	assert(rn >= bn);
 	if (bn == 1) {
@@ -58,6 +63,9 @@ sdigit_t mdi_sub(
 	digit_t const *a, size_t an,
 	digit_t const *b, size_t bn
 ) {
+	assert(r == a || !(r < a + an && a < r + rn));
+	assert(r == b || !(r < b + bn && b < r + rn));
+
 	// The number of digits we'll consider.
 	size_t n = rn;
 	if (r == NULL && n == 0) n = an > bn ? an : bn;
