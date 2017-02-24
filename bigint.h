@@ -16,6 +16,11 @@ struct bigint *bigint_resize(struct bigint *b, sdigit_t ssize);
 struct bigint *bigint_alloc_copy(digit_t const *digits, sdigit_t ssize);
 
 inline static
+struct bigint *bigint_alloc_zero() {
+	return bigint_alloc_copy(NULL, 0);
+}
+
+inline static
 struct bigint *bigint_alloc_uint(digit_t value) {
 	return bigint_alloc_copy(&value, value == 0 ? 0 : 1);
 }
