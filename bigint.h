@@ -32,6 +32,38 @@ struct bigint *bigint_add(
 	digit_t const *b, sdigit_t bssize
 );
 
+// Allocate a bigint containing a - b.
+inline static
+struct bigint *bigint_alloc_sub(
+	digit_t const *a, sdigit_t assize,
+	digit_t const *b, sdigit_t bssize
+) {
+	return bigint_alloc_add(a, assize, b, -bssize);
+}
+
+// Subtract b from a.
+// a is returned and might be reallocated, so assign the result back to a:
+//   a = bigint_sub(a, b->digits, b->ssize);
+inline static
+struct bigint *bigint_sub(
+	struct bigint *a,
+	digit_t const *b, sdigit_t bssize
+) {
+	return bigint_add(a, b, -bssize);
+}
+
+// Allocate a bigint containing -b.
+inline static
+struct bigint *bigint_alloc_neg(digit_t const *b, sdigit_t bssize) {
+	return bigint_alloc_add(NULL, 0, b, -bssize);
+}
+
+// Negate b.
+inline static
+void bigint_neg(struct bigint *b) {
+	b->ssize = -b->ssize;
+}
+
 // Allocate a bigint containing a * b.
 struct bigint *bigint_alloc_mul(
 	digit_t const *a, sdigit_t assize,
