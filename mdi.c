@@ -34,14 +34,23 @@ bool mdi_add(
 ) {
 	assert(rn >= an);
 	assert(rn >= bn);
-	int carry = 0;
-	for (size_t i = 0; i < rn; ++i) {
-		digit_t ad = i < an ? a[i] : 0;
-		digit_t bd = i < bn ? b[i] : 0;
-		carry = add_overflow(ad, carry, &r[i]);
-		carry |= add_overflow(r[i], bd, &r[i]);
+	if (bn == 1) {
+		digit_t carry = b[0];
+		for (size_t i = 0; i < rn; ++i) {
+			digit_t ad = i < an ? a[i] : 0;
+			carry = add_overflow(ad, carry, &r[i]);
+		}
+		return carry;
+	} else {
+		int carry = 0;
+		for (size_t i = 0; i < rn; ++i) {
+			digit_t ad = i < an ? a[i] : 0;
+			digit_t bd = i < bn ? b[i] : 0;
+			carry = add_overflow(ad, carry, &r[i]);
+			carry |= add_overflow(r[i], bd, &r[i]);
+		}
+		return rn && carry;
 	}
-	return rn && carry;
 }
 
 sdigit_t mdi_sub(
