@@ -32,7 +32,7 @@ typedef uint64_t ddigit_t;
 // Add two (unsigned) integers: r = a + b
 // Returns the carry bit.
 // Requires rn >= max(an, bn). When rn > max(an, bn), a carry cannot occur.
-// r, a, and b may be equal.
+// r, a, and b may be equal. r may not otherwise overlap with a or b.
 // To correct for a carry, simply add a (most significant) digit containing 1
 // to the result.
 bool mdi_add(
@@ -49,7 +49,7 @@ bool mdi_add(
 //    N if a > b, so r = a - b
 //    0 if a = b, so r = 0
 //   -N if b < a, so r = b - a
-// r, a, and b may be equal.
+// r, a, and b may be equal. r may not otherwise overlap with a or b.
 // r may be NULL if you're only want to determine N, or just compare a and b.
 // If rn is lower than an or bn, only the first rn digits of a and b are
 // considered, except when r = NULL and rn = 0. Also, when r = NULL, only the
@@ -84,7 +84,7 @@ sdigit_t mdi_cmp(
 // Set negate_b to true to calculate a - b, or false for a + b.
 // Requires rn >= max(an, bn).
 // When rn > max(an, bn), overflow cannot occur.
-// r, a, and b may be equal.
+// r, a, and b may be equal. r may not otherwise overlap with a or b.
 // Overflow simply means the result is correct, except for the sign. Correct it
 // by adding a (most significant) digit with all bits set opposite to the sign
 // of the result.
@@ -95,12 +95,14 @@ bool mdi_add_signed(
 	bool negate_b
 );
 
-// Multiplies (unsigned) integers (r = a * b).. Returns true on overflow.
+// Multiplies (unsigned) integers (r = a * b).
+// Requires rn >= an + bn - 1.
 // When rn >= an + bn, overflow cannot occur.
-// a and r may be equal. b may not be equal to r.
-// On overflow,  you can't easily correct the result as with addition or
-// subtraction, since information is lost.
-bool mdi_multiply(
+// Returns the digit that should be appended to the result (the new
+// most-significant digit) on overflow, 0 otherwise.
+// a and r may be equal. b may not be equal to r. r may not otherwise overlap
+// with a or b.
+digit_t mdi_multiply(
 	digit_t *r, size_t rn,
 	digit_t const *a, size_t an,
 	digit_t const *b, size_t bn
@@ -108,6 +110,7 @@ bool mdi_multiply(
 
 // Divides a by b, stores the result in div, and the remainder in rem.
 // One of div and rem may be NULL.
+// TODO
 bool mdi_divide(
 	digit_t * div, size_t divn,
 	digit_t * rem, size_t remn,
