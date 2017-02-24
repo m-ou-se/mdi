@@ -94,14 +94,25 @@ sdigit_t mdi_sub(
 		}
 
 		// Fill the rest of r with a - b.
-		int borrow = 0;
-		for (size_t i = 0; i < n; ++i) {
-			digit_t ad = i < an ? a[i] : 0;
-			digit_t bd = i < bn ? b[i] : 0;
-			digit_t rd;
-			borrow = sub_overflow(ad, borrow, &rd);
-			borrow |= sub_overflow(rd, bd, &rd);
-			r[i] = rd;
+		if (bn == 1) {
+			// Optimized version when b is single-digit.
+			digit_t borrow = b[0];
+			for (size_t i = 0; i < n; ++i) {
+				digit_t ad = i < an ? a[i] : 0;
+				borrow = sub_overflow(ad, borrow, &r[i]);
+			}
+			assert(borrow == 0);
+		} else {
+			int borrow = 0;
+			for (size_t i = 0; i < n; ++i) {
+				digit_t ad = i < an ? a[i] : 0;
+				digit_t bd = i < bn ? b[i] : 0;
+				digit_t rd;
+				borrow = sub_overflow(ad, borrow, &rd);
+				borrow |= sub_overflow(rd, bd, &rd);
+				r[i] = rd;
+			}
+			assert(borrow == 0);
 		}
 	}
 
