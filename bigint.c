@@ -26,18 +26,6 @@ struct bigint *bigint_resize(struct bigint *b, sdigit_t ssize) {
 	return b;
 }
 
-struct bigint *bigint_alloc_uint(digit_t value) {
-	struct bigint *b = bigint_alloc(1);
-	b->digits[0] = value;
-	return b;
-}
-
-struct bigint *bigint_alloc_int(sdigit_t value) {
-	struct bigint *b = bigint_alloc(value < 0 ? -1 : 1);
-	b->digits[0] = value < 0 ? -(digit_t)value : value;
-	return b;
-}
-
 struct bigint *bigint_alloc_copy(digit_t const *digits, sdigit_t ssize) {
 	struct bigint *b = bigint_alloc(ssize);
 	memcpy(b->digits, digits, sizeof(digit_t) * ABS(ssize));

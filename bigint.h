@@ -13,9 +13,18 @@ void bigint_free(struct bigint *b);
 
 struct bigint *bigint_resize(struct bigint *b, sdigit_t ssize);
 
-struct bigint *bigint_alloc_uint(digit_t value);
-struct bigint *bigint_alloc_int(sdigit_t value);
 struct bigint *bigint_alloc_copy(digit_t const *digits, sdigit_t ssize);
+
+inline static
+struct bigint *bigint_alloc_uint(digit_t value) {
+	return bigint_alloc_copy(&value, value == 0 ? 0 : 1);
+}
+
+inline static
+struct bigint *bigint_alloc_int(sdigit_t value) {
+	digit_t absval = value < 0 ? -(digit_t)value : value;
+	return bigint_alloc_copy(&absval, value == 0 ? 0 : value < 0 ? -1 : 1);
+}
 
 // Allocate a bigint containing a + b.
 struct bigint *bigint_alloc_add(
