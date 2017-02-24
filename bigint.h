@@ -68,7 +68,7 @@ struct bigint *bigint_sub(
 // Allocate a bigint containing -b.
 inline static
 struct bigint *bigint_alloc_neg(digit_t const *b, sdigit_t bssize) {
-	return bigint_alloc_add(NULL, 0, b, -bssize);
+	return bigint_alloc_copy(b, -bssize);
 }
 
 // Negate b.
