@@ -102,7 +102,7 @@ bool mdi_add_signed(
 // most-significant digit) on overflow, 0 otherwise.
 // a and r may be equal. b may not be equal to r. r may not otherwise overlap
 // with a or b.
-digit_t mdi_multiply(
+digit_t mdi_mul(
 	digit_t *r, size_t rn,
 	digit_t const *a, size_t an,
 	digit_t const *b, size_t bn

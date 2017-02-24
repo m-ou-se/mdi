@@ -98,7 +98,7 @@ sdigit_t mdi_sub(
 	return a_lt_b ? -(sdigit_t)n : n;
 }
 
-digit_t mdi_multiply(
+digit_t mdi_mul(
 	digit_t *r, size_t rn,
 	digit_t const *a, size_t an,
 	digit_t const *b, size_t bn
