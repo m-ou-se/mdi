@@ -46,7 +46,7 @@ bool mdi_add(
 	return rn && carry;
 }
 
-sdigit_t mdi_sub_abs(
+sdigit_t mdi_sub(
 	digit_t *r, size_t rn,
 	digit_t const *a, size_t an,
 	digit_t const *b, size_t bn
