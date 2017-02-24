@@ -31,8 +31,7 @@ typedef uint64_t ddigit_t;
 
 // Add two (unsigned) integers: r = a + b
 // Returns the carry bit.
-// Requires rn >= max(an, bn).
-// When rn > max(an, bn), a carry cannot occur.
+// Requires rn >= max(an, bn). When rn > max(an, bn), a carry cannot occur.
 // r, a, and b may be equal.
 // To correct for a carry, simply add a (most significant) digit containing 1
 // to the result.
@@ -51,9 +50,12 @@ bool mdi_add(
 //    0 if a = b, so r = 0
 //   -N if b < a, so r = b - a
 // r, a, and b may be equal.
-// r may be NULL if you're only want to compare a and b, and/or determine N.
+// r may be NULL if you're only want to determine N, or just compare a and b.
 // If rn is lower than an or bn, only the first rn digits of a and b are
-// considered, except when r = NULL and rn = 0.
+// considered, except when r = NULL and rn = 0. Also, when r = NULL, only the
+// last N digits are checked. This means that calling the function first with
+// r = NULL and rn = 0 to determine N, and then with r != NULL and rn = N (if N
+// != 0) is efficient.
 // Overflow cannot occur, since 0 <= |a - b| <= max(a, b).
 sdigit_t mdi_sub(
 	digit_t *r, size_t rn,
@@ -63,13 +65,14 @@ sdigit_t mdi_sub(
 
 // Compare two (unsigned) integers.
 // Returns:
-//   -N if a < b
-//    0 if a = b
 //    N if a > b
+//    0 if a = b
+//   -N if a < b
 // N is the lowest N for which a[N - 1] != b[N - 1].
 // This means N is the number of digits of |a - b|.
 // (See mdi_sub, this is just mdi_sub with r = NULL and rn = 0.)
-inline static sdigit_t mdi_cmp(
+inline static
+sdigit_t mdi_cmp(
 	digit_t const *a, size_t an,
 	digit_t const *b, size_t bn
 ) {

@@ -56,7 +56,7 @@ sdigit_t mdi_sub_abs(
 	if (r == NULL && n == 0) n = an > bn ? an : bn;
 
 	// Find the common prefix and check which one is larger.
-	bool a_lt_b = false;
+	bool a_lt_b;
 	while (n--) {
 		digit_t ad = n < an ? a[n] : 0;
 		digit_t bd = n < bn ? b[n] : 0;
@@ -65,7 +65,7 @@ sdigit_t mdi_sub_abs(
 	}
 	++n;
 
-	if (r != NULL && n > 0) {
+	if (r != NULL && rn > 0) {
 
 		// Fill leading zero's for r.
 		for (size_t i = n; i < rn; ++i) r[i] = 0;
