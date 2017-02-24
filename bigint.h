@@ -81,6 +81,7 @@ struct bigint *bigint_mul(
 
 // Allocate a bigint containing the given hexadecimal number.
 // Negative numbers should be prefixed with '-'.
+// Returns NULL if the given string contains invalid characters.
 struct bigint *bigint_alloc_hex(char const *hex, size_t hexlen);
 struct bigint *bigint_alloc_hex_c(char const *hex);
 
