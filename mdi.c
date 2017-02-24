@@ -40,24 +40,28 @@ bool mdi_add(
 	assert(rn >= an);
 	assert(rn >= bn);
 
+	digit_t carry = 0;
+
 	if (bn == 1) {
 		// Optimized version when b is single-digit.
-		digit_t carry = b[0];
+		carry = b[0];
 		for (size_t i = 0; i < rn; ++i) {
 			digit_t ad = i < an ? a[i] : 0;
 			carry = add_overflow(ad, carry, &r[i]);
 		}
 		return carry;
 	} else {
-		int carry = 0;
 		for (size_t i = 0; i < rn; ++i) {
 			digit_t ad = i < an ? a[i] : 0;
 			digit_t bd = i < bn ? b[i] : 0;
 			carry = add_overflow(ad, carry, &r[i]);
 			carry |= add_overflow(r[i], bd, &r[i]);
 		}
-		return rn && carry;
 	}
+
+	assert(carry == 0 || carry == 1);
+
+	return carry;
 }
 
 sdigit_t mdi_sub(
@@ -94,16 +98,15 @@ sdigit_t mdi_sub(
 		}
 
 		// Fill the rest of r with a - b.
+		digit_t borrow = 0;
 		if (bn == 1) {
 			// Optimized version when b is single-digit.
-			digit_t borrow = b[0];
+			borrow = b[0];
 			for (size_t i = 0; i < n; ++i) {
 				digit_t ad = i < an ? a[i] : 0;
 				borrow = sub_overflow(ad, borrow, &r[i]);
 			}
-			assert(borrow == 0);
 		} else {
-			int borrow = 0;
 			for (size_t i = 0; i < n; ++i) {
 				digit_t ad = i < an ? a[i] : 0;
 				digit_t bd = i < bn ? b[i] : 0;
@@ -112,8 +115,8 @@ sdigit_t mdi_sub(
 				borrow |= sub_overflow(rd, bd, &rd);
 				r[i] = rd;
 			}
-			assert(borrow == 0);
 		}
+		assert(borrow == 0);
 	}
 
 	return a_lt_b ? -(sdigit_t)n : n;
