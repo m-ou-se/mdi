@@ -15,7 +15,7 @@ struct bigint *bigint_resize(struct bigint *b, sdigit_t ssize);
 
 struct bigint *bigint_alloc_uint(digit_t value);
 struct bigint *bigint_alloc_int(sdigit_t value);
-struct bigint *bigint_alloc_copy(struct bigint *b);
+struct bigint *bigint_alloc_copy(digit_t const *digits, sdigit_t ssize);
 
 // Allocate a bigint containing a + b.
 struct bigint *bigint_alloc_add(

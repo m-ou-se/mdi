@@ -38,10 +38,10 @@ struct bigint *bigint_alloc_int(sdigit_t value) {
 	return b;
 }
 
-struct bigint *bigint_alloc_copy(struct bigint *b) {
-	struct bigint *c = bigint_alloc(b->ssize);
-	memcpy(c->digits, b->digits, sizeof(digit_t) * ABS(b->ssize));
-	return c;
+struct bigint *bigint_alloc_copy(digit_t const *digits, sdigit_t ssize) {
+	struct bigint *b = bigint_alloc(ssize);
+	memcpy(b->digits, digits, sizeof(digit_t) * ABS(ssize));
+	return b;
 }
 
 static void strip_leading_zeros(struct bigint *b) {
