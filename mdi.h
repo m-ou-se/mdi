@@ -5,22 +5,28 @@
 #include <stddef.h>
 #include <stdint.h>
 
-typedef uintptr_t digit_t;
-
-#define DIGIT_MAX UINTPTR_MAX
-
-#if DIGIT_MAX == UINT64_MAX
+#ifndef DIGIT_BITS
+#if UINTPTR_MAX == UINT64_MAX
 #define DIGIT_BITS 64
+#else
+#define DIGIT_BITS 32
+#endif
+#endif
+
+#if DIGIT_BITS == 64
+#define DIGIT_MAX 0xFFFFFFFFFFFFFFFF
+typedef uint64_t digit_t;
 typedef int64_t sdigit_t;
 typedef __uint128_t ddigit_t;
 
-#elif DIGIT_MAX == UINT32_MAX
-#define DIGIT_BITS 32
+#elif DIGIT_BITS == 32
+#define DIGIT_MAX 0xFFFFFFFF
+typedef uint32_t digit_t;
 typedef int32_t sdigit_t;
 typedef uint64_t ddigit_t;
 
 #else
-#error digit_t is neither 64 nor 32 bit.
+#error DIGIT_BITS is neither 64 nor 32.
 #endif
 
 // Add two (unsigned) integers: r = a + b
