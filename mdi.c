@@ -39,7 +39,9 @@ bool mdi_add(
 	assert(r == b || !(r < b + bn && b < r + rn));
 	assert(rn >= an);
 	assert(rn >= bn);
+
 	if (bn == 1) {
+		// Optimized version when b is single-digit.
 		digit_t carry = b[0];
 		for (size_t i = 0; i < rn; ++i) {
 			digit_t ad = i < an ? a[i] : 0;

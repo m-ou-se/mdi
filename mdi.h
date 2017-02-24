@@ -42,12 +42,12 @@ bool mdi_add(
 );
 
 // Subtract two (unsigned) integers: r = |a - b|
-// Only with rn >= N, a correct result is produced.
-//   N is the number of digits in the result without leading zeros.
-//   N is always <= max(an, bn).
+// Requires rn >= N.
+// N is the number of digits in the result without leading zeros.
+// N is always <= max(an, bn).
 // Returns:
 //    N if a > b, so r = a - b
-//    0 if a = b, so r = 0
+//    0 if a = b, so r = 0 (and N = 0)
 //   -N if b < a, so r = b - a
 // r, a, and b may be equal. r may not otherwise overlap with a or b.
 // r may be NULL if you're only want to determine N, or just compare a and b.
@@ -69,7 +69,7 @@ sdigit_t mdi_sub(
 //    0 if a = b
 //   -N if a < b
 // N is the lowest N for which a[N - 1] != b[N - 1].
-// This means N is the number of digits of |a - b|.
+// This means ABS(return value) is the number of digits of |a - b|.
 // (See mdi_sub, this is just mdi_sub with r = NULL and rn = 0.)
 inline static
 sdigit_t mdi_cmp(
