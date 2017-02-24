@@ -9,7 +9,7 @@ struct bigint *bigint_mul(
 	if (a->ssize == 0) return a;
 	if (bssize == 0) return bigint_resize(a, 0);
 
-	size_t const rn = ABS(a->ssize) + ABS(bssize);
+	sdigit_t rn = ABS(a->ssize) + ABS(bssize);
 
 	// If bssize is only 1, it might not overflow.
 	if (ABS(bssize) != 1) a = bigint_resize(a, rn);
@@ -20,6 +20,10 @@ struct bigint *bigint_mul(
 		assert(ABS(bssize) == 1);
 		a = bigint_resize(a, rn);
 		a->digits[rn - 1] = overflow;
+	} else {
+		while (rn--) if (a->digits[rn] != 0) break;
+		++rn;
+		a->ssize = a->ssize < 0 ? -rn : rn;
 	}
 
 	if (bssize < 0) a->ssize = -a->ssize;
