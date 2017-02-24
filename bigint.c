@@ -10,7 +10,7 @@
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 
-struct bigint *bigint_alloc(sdigit_t ssize) {
+static struct bigint *bigint_alloc(sdigit_t ssize) {
 	struct bigint *b = (struct bigint *)malloc(sizeof(struct bigint) + sizeof(digit_t) * ABS(ssize));
 	b->ssize = ssize;
 	return b;

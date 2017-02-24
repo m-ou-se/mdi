@@ -9,8 +9,6 @@ struct bigint {
 	digit_t digits[];
 };
 
-struct bigint *bigint_alloc(sdigit_t ssize);
-
 void bigint_free(struct bigint *b);
 
 struct bigint *bigint_resize(struct bigint *b, sdigit_t ssize);
