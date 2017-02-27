@@ -145,33 +145,33 @@ bool mdi_sqrt(
 enum mdi_bitfun {
 	// Basic operations:
 	mdi_bitfun_or = 0,
-	mdi_bitfun_and = 4,
+	mdi_bitfun_and = 7,
 	mdi_bitfun_xor = 8,
 
 	// Modifiers, which must be xorred to apply them:
 	mdi_bitfun_inv_r = 1,
 	mdi_bitfun_inv_a = 2,
-	mdi_bitfun_inv_b = 7,
+	mdi_bitfun_inv_b = 4,
 
 	// All combinations of the above operations with the modifiers:
 	mdi_bitfun_a_or_b     = 0,
-	mdi_bitfun_a_or_nb    = 7,
+	mdi_bitfun_a_or_nb    = 4,
 	mdi_bitfun_na_or_b    = 2,
-	mdi_bitfun_na_or_nb   = 5,
+	mdi_bitfun_na_or_nb   = 6,
 
 	mdi_bitfun_a_nor_b    = 1,
-	mdi_bitfun_a_nor_nb   = 6,
+	mdi_bitfun_a_nor_nb   = 5,
 	mdi_bitfun_na_nor_b   = 3,
-	mdi_bitfun_na_nor_nb  = 4,
+	mdi_bitfun_na_nor_nb  = 7,
 
-	mdi_bitfun_a_and_b    = 4,
+	mdi_bitfun_a_and_b    = 7,
 	mdi_bitfun_a_and_nb   = 3,
-	mdi_bitfun_na_and_b   = 6,
+	mdi_bitfun_na_and_b   = 5,
 	mdi_bitfun_na_and_nb  = 1,
 
-	mdi_bitfun_a_nand_b   = 5,
+	mdi_bitfun_a_nand_b   = 6,
 	mdi_bitfun_a_nand_nb  = 2,
-	mdi_bitfun_na_nand_b  = 7,
+	mdi_bitfun_na_nand_b  = 4,
 	mdi_bitfun_na_nand_nb = 0,
 
 	mdi_bitfun_a_xor_b    = 8,

@@ -9,9 +9,9 @@ void mdi_bitwise(
 	while (rn--) {
 		digit_t ad = rn < an ? a[rn] : 0;
 		digit_t bd = rn < bn ? b[rn] : 0;
-		digit_t rd =
-			func & mdi_bitfun_xor ? ad ^ bd :
-			func & mdi_bitfun_and ? ad & bd : ad | bd;
+		if (func & mdi_bitfun_inv_a) ad = ~ad;
+		if (func & mdi_bitfun_inv_b) bd = ~bd;
+		digit_t rd = func & mdi_bitfun_xor ? ad ^ bd : ad | bd;
 		if (func & mdi_bitfun_inv_r) rd = ~rd;
 		r[rn] = rd;
 	}
