@@ -2,10 +2,6 @@
 
 #include "mdi_impl.h"
 
-inline static ddigit_t ddigit(digit_t high, ddigit_t low) {
-	return (ddigit_t)high << DIGIT_BITS | (ddigit_t)low;
-}
-
 void mdi_div(
 	digit_t *q,
 	digit_t *u, size_t un,
