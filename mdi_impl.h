@@ -1,5 +1,13 @@
 #include "mdi.h"
 
+#if DIGIT_BITS == 64
+typedef __uint128_t ddigit_t;
+#elif DIGIT_BITS == 32
+typedef uint64_t ddigit_t;
+#else
+#error DIGIT_BITS is neither 64 nor 32.
+#endif
+
 #define add_overflow __builtin_add_overflow
 
 #define sub_overflow __builtin_sub_overflow

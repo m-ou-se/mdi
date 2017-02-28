@@ -17,13 +17,11 @@
 #define DIGIT_MAX 0xFFFFFFFFFFFFFFFF
 typedef uint64_t digit_t;
 typedef int64_t sdigit_t;
-typedef __uint128_t ddigit_t;
 
 #elif DIGIT_BITS == 32
 #define DIGIT_MAX 0xFFFFFFFF
 typedef uint32_t digit_t;
 typedef int32_t sdigit_t;
-typedef uint64_t ddigit_t;
 
 #else
 #error DIGIT_BITS is neither 64 nor 32.
