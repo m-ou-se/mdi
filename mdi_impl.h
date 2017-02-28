@@ -17,3 +17,5 @@ inline static void multiply_extend(digit_t a, digit_t b, digit_t *low, digit_t *
 	*low = result & DIGIT_MAX;
 	*high = result >> DIGIT_BITS;
 }
+
+#define num_leading_zeros __builtin_clzll

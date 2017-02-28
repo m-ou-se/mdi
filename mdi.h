@@ -106,14 +106,30 @@ digit_t mdi_mul(
 	digit_t const *b, size_t bn
 );
 
-// Divides a by b, stores the result in div, and the remainder in rem.
-// One of div and rem may be NULL.
-// TODO
-bool mdi_divide(
-	digit_t * div, size_t divn,
-	digit_t * rem, size_t remn,
-	digit_t const * a, size_t an,
-	digit_t const * b, size_t bn
+// Divide a by (single digit) b.
+// Quotient is stored in q, and has size an.
+// The buffer of q may overlap with a, as long as &q[0] >= &a[0].
+// The remainder is returned.
+// b may not be 0.
+digit_t mdi_div1(
+	digit_t *q,
+	digit_t const *a, size_t an,
+	digit_t b
+);
+
+// Divide a by b.
+// The quotient will be written to q, and has size an - bn + 1 if an >= bn, or
+// 0 otherwise. (If an < bn, there's no need to call this function. It is a
+// no-op in that case.)
+// The remainder will be in the first min(an, bn) digits of a.
+// The buffer of q may overlap with u, as long as &q[0] > &a[vn].
+// The buffer of b may not overlap with q or a.
+// b may not have any leading zeros, and bn must be larger than zero. (So, b
+// cannot be zero.)
+void mdi_div(
+	digit_t *q,
+	digit_t *a, size_t an,
+	digit_t const *b, size_t bn
 );
 
 // r = a ^ b
