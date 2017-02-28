@@ -7,7 +7,7 @@ digit_t mdi_mul(
 	digit_t const *a, size_t an,
 	digit_t const *b, size_t bn
 ) {
-	// Quadratic time school-book multiplication.
+	// O(an * bn) time school-book multiplication.
 	assert(rn >= an + bn - 1);
 	assert(r == a || !(r < a + an && a < r + rn));
 	assert(!(r < b + bn && b < r + rn));
