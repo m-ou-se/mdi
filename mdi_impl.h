@@ -1,3 +1,5 @@
+#include <limits.h>
+
 #include "mdi.h"
 
 #if DIGIT_BITS == 64
@@ -18,4 +20,12 @@ inline static void multiply_extend(digit_t a, digit_t b, digit_t *low, digit_t *
 	*high = result >> DIGIT_BITS;
 }
 
+#if DIGIT_MAX == LLONG_MAX
 #define num_leading_zeros __builtin_clzll
+#elif DIGIT_MAX == LONG_MAX
+#define num_leading_zeros __builtin_clzl
+#elif DIGIT_MAX == UINT_MAX
+#define num_leading_zeros __builtin_clz
+#else
+#error digit_t is neither unsigned int, long, nor long long.
+#endif
