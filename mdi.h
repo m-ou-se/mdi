@@ -123,7 +123,7 @@ digit_t mdi_div1(
 // 0 otherwise. (If an < bn, there's no need to call this function. It is a
 // no-op in that case.)
 // The remainder will be in the first min(an, bn) digits of a.
-// The buffer of q may overlap with u, as long as &q[0] > &a[vn].
+// The buffer of q may overlap with u, as long as &q[0] > &a[bn].
 // The buffer of b may not overlap with q or a.
 // b may not have any leading zeros, and bn must be larger than zero. (So, b
 // cannot be zero.)

@@ -2,10 +2,6 @@
 
 #include "mdi_impl.h"
 
-// Divide u by q.
-// Quotient is stored in q, and has size un.
-// The buffer of q may overlap with u, as long as q >= u.
-// The remainder is returned.
 digit_t mdi_div1(
 	digit_t *q,
 	digit_t const *u, size_t un,
