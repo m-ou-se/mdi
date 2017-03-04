@@ -21,10 +21,10 @@ void mdi_div(
 
 	// v may not overlap with neither u nor q.
 	assert(!(v < u + un && u < v + vn));
-	assert(!(v < q + un - vn + 1 && q < v + vn));
+	assert(q == NULL || !(v < q + un - vn + 1 && q < v + vn));
 
 	// q may only partially overlap with u.
-	assert(!(q <= u + vn && u < q + un - vn + 1));
+	assert(q == NULL || !(q <= u + vn && u < q + un - vn + 1));
 
 	if (vn == 1) {
 		u[0] = mdi_div1(q, u, un, v[0]);
@@ -103,6 +103,6 @@ void mdi_div(
 			assert(carry); // Carry cancels out the borrow.
 		}
 
-		q[j - vn] = qd;
+		if (q != NULL) q[j - vn] = qd;
 	}
 }

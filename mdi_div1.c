@@ -17,7 +17,7 @@ digit_t mdi_div1(
 	digit_t carry = 0;
 	for (size_t i = un; --i;) {
 		ddigit_t x = ((ddigit_t)carry << DIGIT_BITS) | u[i];
-		q[i]  = x / v;
+		if (q != NULL) q[i] = x / v;
 		carry = x % v;
 	}
 

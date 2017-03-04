@@ -111,6 +111,7 @@ digit_t mdi_mul(
 // The buffer of q may overlap with a, as long as &q[0] >= &a[0].
 // The remainder is returned.
 // b may not be 0.
+// q may be NULL, if you only want to calculate the remainder.
 digit_t mdi_div1(
 	digit_t *q,
 	digit_t const *a, size_t an,
@@ -126,6 +127,7 @@ digit_t mdi_div1(
 // The buffer of b may not overlap with q or a.
 // b may not have any leading zeros, and bn must be larger than zero. (So, b
 // cannot be zero.)
+// q may be NULL, if you only want to calculate the remainder.
 void mdi_div(
 	digit_t *q,
 	digit_t *a, size_t an,
