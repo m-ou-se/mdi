@@ -95,6 +95,16 @@ struct bigint *bigint_mul(
 	digit_t const *b, sdigit_t bssize
 );
 
+// Compare a and b.
+// Returns:
+//   <0 if a < b
+//    0 if a = b
+//   >0 if a > b
+int bigint_cmp(
+	digit_t const *a, sdigit_t assize,
+	digit_t const *b, sdigit_t bssize
+);
+
 // Allocate a bigint containing the given hexadecimal number.
 // Negative numbers should be prefixed with '-'.
 // Returns NULL if the given string contains invalid characters.
