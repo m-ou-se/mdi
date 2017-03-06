@@ -97,7 +97,7 @@ bool mdi_add_signed(
 // Requires rn >= an + bn - 1.
 // When rn >= an + bn, overflow cannot occur.
 // Returns the digit that should be appended to the result (the new
-// most-significant digit) on overflow, 0 otherwise.
+// most-significant digit), which is zero unless there is an overflow.
 // a and r may be equal. b may not be equal to r. r may not otherwise overlap
 // with a or b.
 digit_t mdi_mul(
