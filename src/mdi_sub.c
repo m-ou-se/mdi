@@ -37,7 +37,7 @@ sdigit_t mdi_sub(
 
 		// Fill the rest of r with a - b.
 		digit_t borrow = 0;
-		if (bn == 1) {
+		if (n > 0 && bn == 1) {
 			// Optimized version when b is single-digit.
 			borrow = b[0];
 			for (size_t i = 0; i < n; ++i) {
