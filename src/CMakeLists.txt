@@ -1,0 +1,24 @@
+add_library(mdi
+	mdi_add.c
+	mdi_add_signed.c
+	mdi_bitwise.c
+	mdi_div.c
+	mdi_div1.c
+	mdi_mul.c
+	mdi_sub.c
+)
+
+add_library(bigint
+	bigint_add.c
+	bigint_alloc.c
+	bigint_alloc_add.c
+	bigint_alloc_copy.c
+	bigint_alloc_hex.c
+	bigint_alloc_hex_c.c
+	bigint_alloc_mul.c
+	bigint_cmp.c
+	bigint_free.c
+	bigint_mul.c
+	bigint_resize.c
+	bigint_to_hex.c
+)
