@@ -95,6 +95,45 @@ struct bigint *bigint_mul(
 	digit_t const *b, sdigit_t bssize
 );
 
+// Allocate a bigint containing a / b.
+// Requires b != 0.
+struct bigint *bigint_alloc_div(
+	digit_t const *a, sdigit_t assize,
+	digit_t const *b, sdigit_t bssize
+);
+
+// Allocate a bigint containing a % b.
+// Requires b != 0.
+struct bigint *bigint_alloc_rem(
+	digit_t const *a, sdigit_t assize,
+	digit_t const *b, sdigit_t bssize
+);
+
+// Store the remainder of a divided by b in a.
+// Requires b != 0.
+void bigint_rem(
+	struct bigint *a,
+	digit_t const *b, sdigit_t bssize
+);
+
+// Return a^b.
+// b is just a single digit, since larger numbers would result in an overflow
+// anyway (except when a is 0 or 1).
+// Requires that a and b are not both zero.
+// Note that b is unsigned. (Negative powers wouldn't result in an integer.)
+struct bigint *bigint_alloc_pow(
+	digit_t const *a, sdigit_t assize,
+	digit_t b
+);
+
+// Return a^b % m.
+// TODO
+struct bigint *bigint_alloc_powmod(
+	digit_t const *a, sdigit_t assize,
+	digit_t const *b, sdigit_t bssize,
+	digit_t const *m, sdigit_t mssize
+);
+
 // Compare a and b.
 // Returns:
 //   <0 if a < b
