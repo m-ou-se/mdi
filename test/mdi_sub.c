@@ -37,7 +37,7 @@ void test_sub(
 
 		ssize_t rssize = mdi_sub(r, rn, a, an, b, bn);
 		if (reuse) printf("%c ", rssize == 0 ? '=' : rssize < 0 ? '<' : '>');
-		print_mdi(r, rn);
+		print_mdi(r, ABS(rssize));
 		printf(" %s\n", comment[reuse]);
 	}
 
@@ -48,7 +48,7 @@ void test_sub(
 		memcpy(r, a, an * sizeof(digit_t));
 		ssize_t rssize = mdi_sub(r, rn, r, rn, r, rn);
 		printf("%c ", rssize == 0 ? '=' : rssize < 0 ? '<' : '>');
-		print_mdi(r, rn);
+		print_mdi(r, ABS(rssize));
 		printf(" %s\n", comment[3]);
 	}
 }
