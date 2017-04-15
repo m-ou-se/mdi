@@ -53,11 +53,11 @@ bool mdi_add(
 //   -N if b < a, so r = b - a
 // r, a, and b may be equal. r may not otherwise overlap with a or b.
 // r may be NULL if you're only want to determine N, or just compare a and b.
-// If rn is lower than an or bn, only the first rn digits of a and b are
-// considered, except when r = NULL and rn = 0. Also, when r = NULL, only the
-// last N digits are checked. This means that calling the function first with
-// r = NULL and rn = 0 to determine N, and then with r != NULL and rn = N (if N
-// != 0) is efficient.
+// If rn is lower than an or bn, only the rn least significant digits of a and
+// b are considered, except when r = NULL and rn = 0. Also, when r = NULL, only
+// the most significant N digits are checked. This means that calling the
+// function first with r = NULL and rn = 0 to determine N, and then with
+// r != NULL and rn = N (if N != 0) is efficient.
 // Overflow cannot occur, since 0 <= |a - b| <= max(a, b).
 sdigit_t mdi_sub(
 	digit_t *r, size_t rn,
