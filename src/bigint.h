@@ -3,6 +3,10 @@
 
 #include "mdi.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Heap-allocated bigint.
 struct bigint {
 	sdigit_t ssize; // Sign and size.
@@ -156,3 +160,7 @@ size_t bigint_to_hex(
 	digit_t const *digits, sdigit_t ssize,
 	char *buf, size_t buflen
 );
+
+#ifdef __cplusplus
+}
+#endif

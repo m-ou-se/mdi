@@ -27,6 +27,10 @@ typedef int32_t sdigit_t;
 #error DIGIT_BITS is neither 64 nor 32.
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Add two (unsigned) integers: r = a + b
 // Returns the carry bit.
 // Requires rn >= max(an, bn). When rn > max(an, bn), a carry cannot occur.
@@ -218,3 +222,7 @@ bool mdi_shift(
 	digit_t const * a, size_t an,
 	size_t shift
 );
+
+#ifdef __cplusplus
+}
+#endif
