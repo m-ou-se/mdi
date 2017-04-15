@@ -14,7 +14,7 @@ struct bigint *bigint_mul(
 	// If bssize is only 1, it might not overflow.
 	if (ABS(bssize) != 1) a = bigint_resize(a, rn);
 
-	digit_t overflow = mdi_mul(a->digits, rn, a->digits, ABS(a->ssize), b, ABS(bssize));
+	digit_t overflow = mdi_mul(a->digits, ABS(a->ssize), a->digits, ABS(a->ssize), b, ABS(bssize));
 
 	if (overflow) {
 		assert(ABS(bssize) == 1);
