@@ -1,2 +1,9 @@
-add_executable(test_mdi_add mdi_add.c)
-target_link_libraries(test_mdi_add mdi bigint)
+set(tests
+	mdi_add
+	mdi_sub
+)
+
+foreach(name ${tests})
+	add_executable(test_${name} ${name}.c)
+	target_link_libraries(test_${name} mdi bigint)
+endforeach()
