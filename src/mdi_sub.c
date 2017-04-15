@@ -57,5 +57,5 @@ sdigit_t mdi_sub(
 		assert(borrow == 0);
 	}
 
-	return a_lt_b ? -(sdigit_t)n : n;
+	return a_lt_b ? -(sdigit_t)n : (sdigit_t)n;
 }
