@@ -35,7 +35,7 @@ struct bigint *bigint_alloc_uint(digit_t value) {
 
 inline static
 struct bigint *bigint_alloc_int(sdigit_t value) {
-	digit_t absval = value < 0 ? -(digit_t)value : value;
+	digit_t absval = value < 0 ? -(digit_t)value : (digit_t)value;
 	return bigint_alloc_copy(&absval, value == 0 ? 0 : value < 0 ? -1 : 1);
 }
 
