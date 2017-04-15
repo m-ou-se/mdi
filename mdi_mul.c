@@ -23,8 +23,8 @@ digit_t mdi_mul(
 			size_t k = i + j;
 			bool c1 = add_overflow(carry, r[k], &r[k]);
 			bool c2 = add_overflow(low, r[k], &r[k]);
-			assert(!(c1 && c2));
-			carry = high + (c1 || c2);
+			//assert(!(c1 && c2));
+			carry = high + c1 + c2;
 		}
 		for (size_t k = i + bn; k < rn && carry; ++k) {
 			carry = add_overflow(carry, r[k], &r[k]);
